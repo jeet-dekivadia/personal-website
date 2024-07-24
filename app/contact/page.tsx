@@ -1,42 +1,42 @@
 "use client";
-import { Github, Mail, Twitter } from "lucide-react";
+import { Github, Mail, LinkedIn } from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 
 const socials = [
 	{
-		icon: <Twitter size={20} />,
-		href: "https://twitter.com/chronark_",
-		label: "Twitter",
-		handle: "@chronark_",
+		icon: <LinkedIn size={20} />,
+		href: "https://www.linkedin.com/in/jeetdekivadia/",
+		label: "LinkedIn",
+		handle: "@jeetdekivadia",
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:dev@chronark.com",
+		href: "mailto:jdekivadia3@gatech.edu",
 		label: "Email",
-		handle: "dev@chronark.com",
+		handle: "jdekivadia3@gatech.edu",
 	},
 	{
 		icon: <Github size={20} />,
-		href: "https://github.com/chronark",
+		href: "https://github.com/jeet-dekivadia",
 		label: "Github",
-		handle: "chronark",
+		handle: "jeet-dekivadia",
 	},
 ];
 
-export default function Example() {
+export default function Contact() {
 	return (
-		<div className=" bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
+		<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
 			<Navigation />
 			<div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
 				<div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-16">
 					{socials.map((s) => (
-						<Card>
+						<Card key={s.label}>
 							<Link
 								href={s.href}
 								target="_blank"
-								className="p-4 relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24  lg:pb-48  md:p-16"
+								className="p-4 relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24 lg:pb-48 md:p-16"
 							>
 								<span
 									className="absolute w-px h-2/3 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent"

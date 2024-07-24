@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft, Eye, Github, Twitter } from "lucide-react";
+import { ArrowLeft, Eye, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -49,7 +49,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 				className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
 					isIntersecting
 						? "bg-zinc-900/0 border-transparent"
-						: "bg-white/10  border-zinc-200 lg:border-transparent"
+						: "bg-white/10 border-zinc-200 lg:border-transparent"
 				}`}
 			>
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
@@ -67,8 +67,8 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 								views,
 							)}
 						</span>
-						<Link target="_blank" href="https://twitter.com/chronark_">
-							<Twitter
+						<Link target="_blank" href="https://linkedin.com/in/jeet-dekivadia">
+							<Linkedin
 								className={`w-6 h-6 duration-200 hover:font-medium ${
 									isIntersecting
 										? " text-zinc-400 hover:text-zinc-100"
@@ -76,7 +76,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 								} `}
 							/>
 						</Link>
-						<Link target="_blank" href="https://github.com/chronark">
+						<Link target="_blank" href="https://github.com/jeet-dekivadia">
 							<Github
 								className={`w-6 h-6 duration-200 hover:font-medium ${
 									isIntersecting
@@ -99,7 +99,7 @@ export const Header: React.FC<Props> = ({ project, views }) => {
 					</Link>
 				</div>
 			</div>
-			<div className="container mx-auto relative isolate overflow-hidden  py-24 sm:py-32">
+			<div className="container mx-auto relative isolate overflow-hidden py-24 sm:py-32">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8 text-center flex flex-col items-center">
 					<div className="mx-auto max-w-2xl lg:mx-0">
 						<h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl font-display">
