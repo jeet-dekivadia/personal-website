@@ -38,6 +38,8 @@ export default function Home() {
       <div className="my-16 text-center animate-fade-in">
         <h2 className="text-lg text-zinc-500 ">
           Computer Science freshman at Georgia Tech
+        </h2>
+        <h2 className="text-lg text-zinc-500 ">
           Actively looking for SWE Internships for Summer 2025
         </h2>
       </div>
