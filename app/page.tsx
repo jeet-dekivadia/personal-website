@@ -17,24 +17,13 @@ export default function Home() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
+              className="px-4 py-2 text-white bg-zinc-700 rounded hover:bg-zinc-500"
             >
               {item.name}
             </Link>
           ))}
         </ul>
       </nav>
-      <div className="flex justify-center space-x-4 mb-8">
-        {navigation.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="px-4 py-2 text-white bg-zinc-700 rounded hover:bg-zinc-500"
-          >
-            {item.name}
-          </Link>
-        ))}
-      </div>
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
