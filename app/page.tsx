@@ -38,6 +38,7 @@ export default function Home() {
       <div className="my-16 text-center animate-fade-in">
         <h2 className="text-lg text-zinc-500 ">
           Computer Science freshman at Georgia Tech
+          Actively looking for SWE Internships for Summer 2025
         </h2>
       </div>
       <img src="/pp 2024 a.jpg" alt="Jeet Dekivadia" className="profile-photo" />
