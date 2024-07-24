@@ -6,19 +6,18 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "chronark.com",
-    template: "%s | chronark.com",
+    default: "Jeet's Portfolio",
+    template: "%s | Jeet's Portfolio",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "CS Freshman at Georgia Tech",
   openGraph: {
-    title: "chronark.com",
-    description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
-    url: "https://chronark.com",
-    siteName: "chronark.com",
+    title: "Jeet's Portfolio",
+    description: "CS Freshman at Georgia Tech",
+    url: "https://jeet-dekivadia.vercel.app/",
+    siteName: "Jeet's Portfolio",
     images: [
       {
-        url: "https://chronark.com/og.png",
+        url: "https://jeet-dekivadia.vercel.app/og.jpg", // Ensure you have this image in the public directory or provide a valid URL
         width: 1920,
         height: 1080,
       },
@@ -38,13 +37,14 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Chronark",
+    title: "Jeet's Portfolio",
     card: "summary_large_image",
   },
   icons: {
-    shortcut: "/favicon.png",
+    shortcut: "/pp%2024%20a.jpg", // Path to the favicon
   },
 };
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
