@@ -14,12 +14,13 @@
   --color-primary: #003e7e; /* Georgia Tech Navy */
   --color-secondary: #f1c232; /* Georgia Tech Gold */
   --color-background: #f4f4f4; /* Light Gray for background */
+  --color-light-golden: #f5e5a4; /* Light Golden Background */
   --color-text: #333; /* Dark Gray for text */
 }
 
 /* Apply Colors */
 body {
-  background-color: var(--color-background);
+  background-color: var(--color-light-golden); /* Changed to light golden */
   color: var(--color-text);
 }
 
@@ -82,4 +83,31 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* Background Effect */
+@keyframes moveDots {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+.background-dots {
+  background-color: var(--color-light-golden);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.background-dots::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 20%, transparent 80%);
+  animation: moveDots 10s linear infinite;
 }
