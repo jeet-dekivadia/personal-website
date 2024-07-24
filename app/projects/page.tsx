@@ -1,46 +1,48 @@
-"use client";
-import Link from "next/link";
-import { Header } from "../components/header";
+import { notFound } from "next/navigation";
+import { allProjects } from "contentlayer/generated";
+import { Mdx } from "@/app/components/mdx";
+import { Header } from "./header";
+import "./mdx.css";
+import { ReportView } from "./view";
+import { Redis } from "@upstash/redis";
 
-const projects = [
-  {
-    title: "NetGuardian",
-    description: "Network Security Solution - Engineered a network security solution that reduced breaches by 40%, using Java and Flask to build a real-time security system.",
-    url: "https://example.com/netguardian",
-    repository: "jeet-dekivadia/netguardian",
-    views: 1200,
-  },
-  {
-    title: "PirateX",
-    description: "Anti-Piracy Ethical Hacking - Reduced piracy rates by 35% with an anti-piracy solution using ethical hacking techniques, enhancing system security.",
-    url: "https://example.com/piratex",
-    repository: "jeet-dekivadia/piratex",
-    views: 800,
-  },
-  {
-    title: "NeoLearn",
-    description: "AI-based Smart Education - Created an AI-based educational platform with TensorFlow and React, improving learning outcomes by 20%.",
-    url: "https://example.com/neolearn",
-    repository: "jeet-dekivadia/neolearn",
-    views: 1500,
-  },
-];
+export const revalidate = 60;
 
-export default function ProjectsPage() {
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+const redis = Redis.fromEnv();
+
+export async function generateStaticParams(): Promise<Props["params"][]> {
+  return allProjects
+    .filter((p) => p.published)
+    .map((p) => ({
+      slug: p.slug,
+    }));
+}
+
+export default async function PostPage({ params }: Props) {
+  const slug = params?.slug;
+  const project = allProjects.find((project) => project.slug === slug);
+
+  if (!project) {
+    notFound();
+  }
+
+  const views =
+    (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
+
   return (
-    <div className="bg-gradient-to-tl from-black via-zinc-900 to-black">
-      <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center text-white mb-12">Projects</h1>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <Header
-              key={index}
-              project={project}
-              views={project.views}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="bg-zinc-50 min-h-screen">
+      <Header project={project} views={views} />
+      <ReportView slug={project.slug} />
+
+      <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
+        <Mdx code={project.body.code} />
+      </article>
     </div>
   );
 }
