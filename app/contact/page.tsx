@@ -1,5 +1,5 @@
 "use client";
-import { Github, Mail, LinkedIn } from "lucide-react";
+import { Github, Mail, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
