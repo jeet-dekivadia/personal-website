@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: "Jeet's Portfolio",
     images: [
       {
-        url: "https://jeet-dekivadia.vercel.app/pp 2024 a.jpg", // Ensure you have this image in the public directory or provide a valid URL
+        url: "https://jeet-dekivadia.vercel.app/favicon.jpg", // Ensure you have this image in the public directory or provide a valid URL
         width: 1920,
         height: 1080,
       },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   icons: {
-    shortcut: "/pp 2024 a.jpg", // Path to the favicon
+    shortcut: "/favicon.jpg", // Path to the favicon
   },
 };
 
