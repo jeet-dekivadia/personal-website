@@ -1,5 +1,5 @@
 "use client";
-import { GitHub } from "lucide-react";
+import { Github } from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
@@ -41,7 +41,7 @@ export default function Projects() {
 									aria-hidden="true"
 								/>
 								<span className="relative z-10 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange">
-									<GitHub size={20} />
+									<Github size={20} />
 								</span>{" "}
 								<div className="z-10 flex flex-col items-center">
 									<span className="lg:text-xl font-medium duration-150 xl:text-3xl text-zinc-200 group-hover:text-white font-display">
