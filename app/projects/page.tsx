@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { allProjects } from 'contentlayer/generated';
 import { Mdx } from "@/app/components/mdx";
-import { Header } from "./[slug]/header";
-import "./[slug]/mdx.css";
-import { ReportView } from "./[slug]/view";
+import { Header } from "@/app/projects/[slug]/header";
+import "@/app/projects/[slug]/mdx.css";
+import { ReportView } from "@/app/projects/[slug]/view";
 import { Redis } from "@upstash/redis";
 
 export const revalidate = 60;
@@ -24,7 +24,7 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
     }));
 }
 
-export default async function PostPage({ params }: Props) {
+export default async function ProjectsPage({ params }: Props) {
   const slug = params?.slug;
   const project = allProjects.find((project) => project.slug === slug);
 

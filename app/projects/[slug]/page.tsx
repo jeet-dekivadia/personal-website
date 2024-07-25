@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { allProjects } from 'contentlayer/generated';
 import { Mdx } from "@/app/components/mdx";
-import { Header } from "./header";
-import "./mdx.css";
-import { ReportView } from "./view";
+import { Header } from "@/app/projects/[slug]/header";
+import "@/app/projects/[slug]/mdx.css";
+import { ReportView } from "@/app/projects/[slug]/view";
 import { Redis } from "@upstash/redis";
 
 export const revalidate = 60;
