@@ -28,10 +28,6 @@ export default async function PostPage({ params }: Props) {
   const slug = params?.slug;
   const project = allProjects.find((project) => project.slug === slug);
 
-  if (!project) {
-    notFound();
-  }
-
   const views =
     (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
 
