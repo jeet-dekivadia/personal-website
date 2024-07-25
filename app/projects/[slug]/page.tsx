@@ -28,12 +28,12 @@ export default async function PostPage({ params }: Props) {
   const slug = params?.slug;
   const project = allProjects.find((project) => project.slug === slug);
 
-  if (!project) {
-    notFound();
-  }
-
   const views =
     (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
+
+  if (!project) {
+    return notFound();
+  }
 
   return (
     <div className="bg-zinc-50 min-h-screen">
