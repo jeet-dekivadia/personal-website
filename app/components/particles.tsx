@@ -87,8 +87,8 @@ export default function Particles({
       canvasSize.current.h = canvasContainerRef.current.offsetHeight;
       canvasRef.current.width = canvasSize.current.w * dpr;
       canvasRef.current.height = canvasSize.current.h * dpr;
-      canvasRef.current.style.width = ${canvasSize.current.w}px;
-      canvasRef.current.style.height = ${canvasSize.current.h}px;
+      canvasRef.current.style.width = `${canvasSize.current.w}px`;
+      canvasRef.current.style.height = `${canvasSize.current.h}px`;
       context.current.scale(dpr, dpr);
     }
   };
@@ -98,7 +98,7 @@ export default function Particles({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const size = Math.floor(Math.random() * 2) + 0.1;
+    const size = (Math.floor(Math.random() * 2) + 0.1) * 5; // Increased size
     const alpha = 0;
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
     const dx = (Math.random() - 0.5) * 0.2;
@@ -134,12 +134,12 @@ export default function Particles({
         y,
         size
       );
-      gradient.addColorStop(0, rgba(255, 223, 0, ${alpha}));
-      gradient.addColorStop(1, rgba(255, 215, 0, ${alpha * 0.6}));
+      gradient.addColorStop(0, `rgba(255, 223, 0, ${alpha})`);
+      gradient.addColorStop(1, `rgba(255, 215, 0, ${alpha * 0.6})`);
 
       context.current.fillStyle = gradient;
-      context.current.shadowBlur = 10;
-      context.current.shadowColor = rgba(255, 215, 0, ${alpha});
+      context.current.shadowBlur = 50; // Increased shadowBlur for more glow
+      context.current.shadowColor = `rgba(255, 215, 0, ${alpha * 1.5})`; // Adjusted shadowColor opacity
       context.current.fill();
       context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
 
