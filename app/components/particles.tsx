@@ -27,16 +27,6 @@ export default function Particles({
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
-  const beeImage = useRef<HTMLImageElement | null>(null);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = "/bee.png"; // Path to your bee image in the public folder
-    img.onload = () => {
-      beeImage.current = img;
-    };
-  }, []);
-
   useEffect(() => {
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
@@ -97,8 +87,8 @@ export default function Particles({
       canvasSize.current.h = canvasContainerRef.current.offsetHeight;
       canvasRef.current.width = canvasSize.current.w * dpr;
       canvasRef.current.height = canvasSize.current.h * dpr;
-      canvasRef.current.style.width = `${canvasSize.current.w}px`;
-      canvasRef.current.style.height = `${canvasSize.current.h}px`;
+      canvasRef.current.style.width = ${canvasSize.current.w}px;
+      canvasRef.current.style.height = ${canvasSize.current.h}px;
       context.current.scale(dpr, dpr);
     }
   };
@@ -108,7 +98,7 @@ export default function Particles({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const size = Math.floor(Math.random() * 2) + 10; // Adjust the size as needed
+    const size = Math.floor(Math.random() * 2) + 0.1;
     const alpha = 0;
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
     const dx = (Math.random() - 0.5) * 0.2;
@@ -128,19 +118,29 @@ export default function Particles({
     };
   };
 
-  const drawBee = (circle: Circle, update = false) => {
-    if (context.current && beeImage.current) {
+  const drawCircle = (circle: Circle, update = false) => {
+    if (context.current) {
       const { x, y, translateX, translateY, size, alpha } = circle;
       context.current.translate(translateX, translateY);
-      context.current.globalAlpha = alpha;
-      context.current.drawImage(
-        beeImage.current,
-        x - size / 2,
-        y - size / 2,
-        size,
+      context.current.beginPath();
+      context.current.arc(x, y, size, 0, 2 * Math.PI);
+
+      // Create a gradient for the golden color
+      const gradient = context.current.createRadialGradient(
+        x,
+        y,
+        size * 0.1,
+        x,
+        y,
         size
       );
-      context.current.globalAlpha = 1;
+      gradient.addColorStop(0, rgba(255, 223, 0, ${alpha}));
+      gradient.addColorStop(1, rgba(255, 215, 0, ${alpha * 0.6}));
+
+      context.current.fillStyle = gradient;
+      context.current.shadowBlur = 10;
+      context.current.shadowColor = rgba(255, 215, 0, ${alpha});
+      context.current.fill();
       context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       if (!update) {
@@ -165,7 +165,7 @@ export default function Particles({
     const particleCount = quantity;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
-      drawBee(circle);
+      drawCircle(circle);
     }
   };
 
@@ -222,10 +222,10 @@ export default function Particles({
         circles.current.splice(i, 1);
         // create a new circle
         const newCircle = circleParams();
-        drawBee(newCircle);
+        drawCircle(newCircle);
         // update the circle position
       } else {
-        drawBee(
+        drawCircle(
           {
             ...circle,
             x: circle.x,
