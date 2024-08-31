@@ -40,7 +40,7 @@ export default function Home() {
           Computer Science freshman at Georgia Tech
         </h2>
         <h2 className="text-lg text-zinc-500 ">
-          Actively looking for SWE Internships for Summer 2025
+          Actively looking for SWE Internships for Summer 2025 and Beyond
         </h2>
       </div>
       <img src="/pp 2024 a.jpg" alt="Jeet Dekivadia" className="profile-photo" />
