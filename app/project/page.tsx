@@ -7,19 +7,19 @@ import { Card } from "../components/card";
 // Projects data
 const projects = [
 	{
-		title: "NetGuardian - Network Security Solution",
-		description: "Developed for the ACUITY 2023 NetSec Challenge.",
-		link: "https://github.com/jeet-dekivadia/netguardian", // Replace with your actual project link
+		title: "SurgeVue - Neurosurgeries made safe!",
+		description: "Awarded 2 prizes at PennApps XXV. Augment Reality specially designed for professional surgeons and medical students to make their process of performing the surgery much more efficient.",
+		link: "https://github.com/jeet-dekivadia/SurgeVue", 
 	},
 	{
-		title: "PirateX - Anti-Piracy Ethical Hacking",
-		description: "Created for the STAI 2023 HackwithEthics competition.",
-		link: "https://github.com/jeet-dekivadia/piratex", // Replace with your actual project link
+		title: "Pantry Tracker - Anti-Piracy Ethical Hacking",
+		description: "A pantry management application using Next.js, React, Material UI, and Firebase",
+		link: "https://github.com/jeet-dekivadia/pantry-tracker",
 	},
 	{
-		title: "NeoLearn - AI-based Smart Education",
-		description: "Developed for The New York Academy of Sciences.",
-		link: "https://github.com/jeet-dekivadia/neolearn", // Replace with your actual project link
+		title: "Trash2Treasure",
+		description: "Developed solo at HackGT 11. A gamified recycling app that turns reducing waste into rewards and tracks your impact as you compete for a greener world.",
+		link: "https://github.com/jeet-dekivadia/Trash2Treasure",
 	},
 ];
 
