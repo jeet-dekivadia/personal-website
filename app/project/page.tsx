@@ -19,7 +19,7 @@ const projects = [
 	{
 		title: "Trash2Treasure",
 		description: "Developed solo at HackGT 11. A gamified recycling app that turns reducing waste into rewards and tracks your impact as you compete for a greener world.",
-		link: "https://github.com/jeet-dekivadia/Trash2Treasure",
+		link: "https://github.com/jeet-dekivadia/trash2treasure-website",
 	},
 ];
 
