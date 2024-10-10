@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { useState } from "react";
 import { CSSTransition } from 'react-transition-group';
-import "../global.css"; // Assuming you have a global styles.css for the sparkle and flip effects
+import "/global.css"; 
 
 const projects = [
   {
