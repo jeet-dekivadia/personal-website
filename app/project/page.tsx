@@ -3,23 +3,25 @@ import { Github } from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { useState } from "react";
-import { CSSTransition } from 'react-transition-group';
-import "/global.css"; 
+import "/global.css";
 
 const projects = [
   {
     title: "SurgeVue - Neurosurgeries made safe!",
-    description: "Awarded 2 prizes at PennApps XXV. Augment Reality specially designed for professional surgeons and medical students to make their process of performing the surgery much more efficient.",
+    description:
+      "Awarded 2 prizes at PennApps XXV. Augment Reality specially designed for professional surgeons and medical students to make their process of performing the surgery much more efficient.",
     link: "https://github.com/jeet-dekivadia/SurgeVue",
   },
   {
     title: "Pantry Tracker - Anti-Piracy Ethical Hacking",
-    description: "A pantry management application using Next.js, React, Material UI, and Firebase",
+    description:
+      "A pantry management application using Next.js, React, Material UI, and Firebase",
     link: "https://github.com/jeet-dekivadia/pantry-tracker",
   },
   {
     title: "Trash2Treasure",
-    description: "Developed solo at HackGT 11. A gamified recycling app that turns reducing waste into rewards and tracks your impact as you compete for a greener world.",
+    description:
+      "Developed solo at HackGT 11. A gamified recycling app that turns reducing waste into rewards and tracks your impact as you compete for a greener world.",
     link: "https://github.com/jeet-dekivadia/trash2treasure-website",
   },
 ];
@@ -74,7 +76,13 @@ export default function Projects() {
                     <span className="mt-4 text-sm text-center text-zinc-400">
                       {project.description}
                     </span>
-                    <Link href={project.link} target="_blank" className="text-blue-500 hover:underline">View Project</Link>
+                    <Link
+                      href={project.link}
+                      target="_blank"
+                      className="text-blue-500 hover:underline"
+                    >
+                      View Project
+                    </Link>
                   </div>
                 </div>
               </div>
