@@ -257,7 +257,9 @@ export default function Particles({
     });
 
     const closestCircles = findClosestCircles(mouse.current.x, mouse.current.y, circles.current, 3);
-    drawLines(closestCircles, mouse.current.x, mouse.current.y);
+    if (context.current) {
+      drawLines(closestCircles, mouse.current.x, mouse.current.y);
+    }
 
     window.requestAnimationFrame(animate);
   };
