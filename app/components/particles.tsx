@@ -98,7 +98,7 @@ export default function Particles({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const size = (Math.floor(Math.random() * 2) + 0.1) * 5; // Increased size
+    const size = (Math.floor(Math.random() * 2) + 0.1) * 5;
     const alpha = 0;
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
     const dx = (Math.random() - 0.5) * 0.2;
@@ -125,7 +125,6 @@ export default function Particles({
       context.current.beginPath();
       context.current.arc(x, y, size, 0, 2 * Math.PI);
 
-      // Create a gradient for the golden color
       const gradient = context.current.createRadialGradient(
         x,
         y,
@@ -138,8 +137,8 @@ export default function Particles({
       gradient.addColorStop(1, `rgba(255, 215, 0, ${alpha * 0.6})`);
 
       context.current.fillStyle = gradient;
-      context.current.shadowBlur = 50; // Increased shadowBlur for more glow
-      context.current.shadowColor = `rgba(255, 215, 0, ${alpha * 1.5})`; // Adjusted shadowColor opacity
+      context.current.shadowBlur = 50;
+      context.current.shadowColor = `rgba(255, 215, 0, ${alpha * 1.5})`;
       context.current.fill();
       context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
 
@@ -181,15 +180,37 @@ export default function Particles({
     return remapped > 0 ? remapped : 0;
   };
 
+  const findClosestCircles = (mouseX: number, mouseY: number, circles: Circle[], count: number): Circle[] => {
+    return circles
+      .map(circle => ({
+        ...circle,
+        distance: Math.hypot(circle.x + circle.translateX - mouseX, circle.y + circle.translateY - mouseY),
+      }))
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, count);
+  };
+  
+  const drawLines = (closestCircles: Circle[], mouseX: number, mouseY: number) => {
+    if (context.current) {
+      context.current.beginPath();
+      context.current.strokeStyle = 'white';
+      context.current.lineWidth = 1;
+      closestCircles.forEach(circle => {
+        context.current.moveTo(mouseX, mouseY);
+        context.current.lineTo(circle.x + circle.translateX, circle.y + circle.translateY);
+      });
+      context.current.stroke();
+    }
+  };
+
   const animate = () => {
     clearContext();
     circles.current.forEach((circle: Circle, i: number) => {
-      // Handle the alpha value
       const edge = [
-        circle.x + circle.translateX - circle.size, // distance from left edge
-        canvasSize.current.w - circle.x - circle.translateX - circle.size, // distance from right edge
-        circle.y + circle.translateY - circle.size, // distance from top edge
-        canvasSize.current.h - circle.y - circle.translateY - circle.size, // distance from bottom edge
+        circle.x + circle.translateX - circle.size,
+        canvasSize.current.w - circle.x - circle.translateX - circle.size,
+        circle.y + circle.translateY - circle.size,
+        canvasSize.current.h - circle.y - circle.translateY - circle.size,
       ];
       const closestEdge = edge.reduce((a, b) => Math.min(a, b));
       const remapClosestEdge = parseFloat(
@@ -211,19 +232,15 @@ export default function Particles({
       circle.translateY +=
         (mouse.current.y / (staticity / circle.magnetism) - circle.translateY) /
         ease;
-      // circle gets out of the canvas
       if (
         circle.x < -circle.size ||
         circle.x > canvasSize.current.w + circle.size ||
         circle.y < -circle.size ||
         circle.y > canvasSize.current.h + circle.size
       ) {
-        // remove the circle from the array
         circles.current.splice(i, 1);
-        // create a new circle
         const newCircle = circleParams();
         drawCircle(newCircle);
-        // update the circle position
       } else {
         drawCircle(
           {
@@ -238,6 +255,10 @@ export default function Particles({
         );
       }
     });
+
+    const closestCircles = findClosestCircles(mouse.current.x, mouse.current.y, circles.current, 3);
+    drawLines(closestCircles, mouse.current.x, mouse.current.y);
+
     window.requestAnimationFrame(animate);
   };
 
