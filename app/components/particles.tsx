@@ -11,6 +11,20 @@ interface ParticlesProps {
   refresh?: boolean;
 }
 
+type Circle = {
+  x: number;
+  y: number;
+  translateX: number;
+  translateY: number;
+  size: number;
+  alpha: number;
+  targetAlpha: number;
+  dx: number;
+  dy: number;
+  magnetism: number;
+  distance?: number; // Optional for sorting
+};
+
 export default function Particles({
   className = "",
   quantity = 30,
@@ -21,7 +35,7 @@ export default function Particles({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
-  const circles = useRef<any[]>([]);
+  const circles = useRef<Circle[]>([]);
   const mousePosition = useMousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
@@ -67,19 +81,6 @@ export default function Particles({
     }
   };
 
-  type Circle = {
-    x: number;
-    y: number;
-    translateX: number;
-    translateY: number;
-    size: number;
-    alpha: number;
-    targetAlpha: number;
-    dx: number;
-    dy: number;
-    magnetism: number;
-  };
-
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
       circles.current.length = 0;
@@ -121,6 +122,7 @@ export default function Particles({
   const drawCircle = (circle: Circle, update = false) => {
     if (context.current) {
       const { x, y, translateX, translateY, size, alpha } = circle;
+      context.current.save();
       context.current.translate(translateX, translateY);
       context.current.beginPath();
       context.current.arc(x, y, size, 0, 2 * Math.PI);
@@ -140,7 +142,7 @@ export default function Particles({
       context.current.shadowBlur = 50;
       context.current.shadowColor = `rgba(255, 215, 0, ${alpha * 1.5})`;
       context.current.fill();
-      context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
+      context.current.restore();
 
       if (!update) {
         circles.current.push(circle);
@@ -180,27 +182,36 @@ export default function Particles({
     return remapped > 0 ? remapped : 0;
   };
 
-  const findClosestCircles = (mouseX: number, mouseY: number, circles: Circle[], count: number): Circle[] => {
+  const findClosestCircles = (
+    mouseX: number,
+    mouseY: number,
+    circles: Circle[],
+    count: number
+  ): Circle[] => {
     return circles
-      .map(circle => ({
+      .map((circle) => ({
         ...circle,
-        distance: Math.hypot(circle.x + circle.translateX - mouseX, circle.y + circle.translateY - mouseY),
+        distance: Math.hypot(
+          circle.x + circle.translateX - mouseX,
+          circle.y + circle.translateY - mouseY
+        ),
       }))
       .sort((a, b) => a.distance - b.distance)
       .slice(0, count);
   };
-  
+
   const drawLines = (closestCircles: Circle[], mouseX: number, mouseY: number) => {
-    if (context.current) {
-      context.current.beginPath();
-      context.current.strokeStyle = 'white';
-      context.current.lineWidth = 1;
-      closestCircles.forEach(circle => {
-        context.current.moveTo(mouseX, mouseY);
-        context.current.lineTo(circle.x + circle.translateX, circle.y + circle.translateY);
-      });
-      context.current.stroke();
-    }
+    const ctx = context.current;
+    if (!ctx) return; // Early return if context.current is null
+
+    ctx.beginPath();
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 1;
+    closestCircles.forEach((circle) => {
+      ctx.moveTo(mouseX, mouseY);
+      ctx.lineTo(circle.x + circle.translateX, circle.y + circle.translateY);
+    });
+    ctx.stroke();
   };
 
   const animate = () => {
@@ -256,17 +267,20 @@ export default function Particles({
       }
     });
 
-    const closestCircles = findClosestCircles(mouse.current.x, mouse.current.y, circles.current, 3);
-    if (context.current) {
-      drawLines(closestCircles, mouse.current.x, mouse.current.y);
-    }
+    const closestCircles = findClosestCircles(
+      mouse.current.x,
+      mouse.current.y,
+      circles.current,
+      3
+    );
+    drawLines(closestCircles, mouse.current.x, mouse.current.y);
 
     window.requestAnimationFrame(animate);
   };
 
   return (
     <div className={className} ref={canvasContainerRef} aria-hidden="true">
-      <canvas ref={canvasRef} />
+      <canvas ref={canvasRef} role="img" aria-label="Interactive particle animation" />
     </div>
   );
 }
