@@ -43,7 +43,7 @@ export default function Home() {
           Actively looking for SWE Internships for Summer 2025 and Beyond
         </h2>
       </div>
-      <img src="/pp 2024 a.jpg" alt="Jeet Dekivadia" className="profile-photo" />
+      <img src="/headshot.jpg" alt="Jeet Dekivadia" className="profile-photo" />
     </div>
   );
 }
